@@ -8,4 +8,5 @@ public interface PassengerService {
 
     AuthenticationResponse registerPassenger(PassengerDto passengerDto);
     AuthenticationResponse loginPassenger(LoginDto loginDto);
+    PassengerDto getPassenger(Integer id);
 }

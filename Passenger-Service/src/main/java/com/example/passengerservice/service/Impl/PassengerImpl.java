@@ -8,6 +8,7 @@ import com.example.passengerservice.repository.PassengerRepo;
 import com.example.passengerservice.service.JwtService;
 import com.example.passengerservice.service.PassengerService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,7 @@ public class PassengerImpl implements PassengerService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final ModelMapper modelMapper;
     @Override
     public AuthenticationResponse registerPassenger(PassengerDto passengerDto) {
         Passenger passenger=new Passenger();
@@ -50,5 +52,11 @@ public class PassengerImpl implements PassengerService {
         String toke = jwtService.generateToke(passenger);
 
         return new AuthenticationResponse(toke);
+    }
+
+    @Override
+    public PassengerDto getPassenger(Integer id) {
+        Optional<Passenger> passenger = passengerRepo.findById(id);
+        return modelMapper.map(passenger, PassengerDto.class);
     }
 }

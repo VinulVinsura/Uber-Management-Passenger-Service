@@ -6,10 +6,7 @@ import com.example.passengerservice.dto.PassengerDto;
 import com.example.passengerservice.service.PassengerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -30,6 +27,13 @@ public class ProfileManagementController {
     public ResponseEntity<AuthenticationResponse> loginPassenger(@RequestBody LoginDto loginDto){
         AuthenticationResponse response = passengerService.loginPassenger(loginDto);
         return ResponseEntity.ok(response);
+    }
+
+    // Retrieve passenger profile details
+    @GetMapping("/getPassengerById/{id}")
+    public ResponseEntity<PassengerDto> getPassengerById(@PathVariable Integer id){
+        PassengerDto passengerDto = passengerService.getPassenger(id);
+        return ResponseEntity.ok(passengerDto);
     }
 
 }
