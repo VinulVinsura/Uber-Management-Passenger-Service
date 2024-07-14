@@ -21,6 +21,7 @@ public class JwtService {
         String token= Jwts.
                 builder()
                 .subject(passenger.getUsername())
+                .claim("id",passenger.getId())
                 .claim("firstName",passenger.getFirstName())
                 .claim("LastName",passenger.getLastName())
                 .issuedAt(new Date(System.currentTimeMillis()))
