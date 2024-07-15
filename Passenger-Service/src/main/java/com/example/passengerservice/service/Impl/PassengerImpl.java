@@ -32,6 +32,7 @@ public class PassengerImpl implements PassengerService {
     private final RestTemplate restTemplate;
     @Override
     public AuthenticationResponse registerPassenger(PassengerDto passengerDto) {
+
         Passenger passenger=new Passenger();
         passenger.setFirstName(passengerDto.getFirstName());
         passenger.setLastName(passengerDto.getLastName());
@@ -66,6 +67,7 @@ public class PassengerImpl implements PassengerService {
         return modelMapper.map(passenger, PassengerDto.class);
     }
 
+    //Get All Notification by Uber-Service DataBase (Use Rest Template)
     @Override
     public ResponseEntity<List> getNotification() {
         ResponseEntity<List> responseEntity = restTemplate.exchange("http://localhost:9001/all-notifications",
@@ -73,3 +75,4 @@ public class PassengerImpl implements PassengerService {
         return responseEntity;
     }
 }
+
