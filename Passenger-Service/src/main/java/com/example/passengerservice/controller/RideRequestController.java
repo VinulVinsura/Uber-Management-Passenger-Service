@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
@@ -33,8 +35,18 @@ public class RideRequestController {
         }catch (RuntimeException ex){
             return ResponseEntity.notFound().build();
         }
+    }
 
+    // List all rides for the passenger.
+    @GetMapping("/allRides/{passengerId}")
+    public ResponseEntity<List<RideRequestDto>> getAlLRidesByPassengerId(@PathVariable Integer passengerId){
 
+           List<RideRequestDto> allRideByPassengerId = rideRequestService.getAllRideByPassengerId(passengerId);
+           System.out.println(allRideByPassengerId);
+           if (allRideByPassengerId.isEmpty()){
+                return ResponseEntity.notFound().build();
+           }
+           return ResponseEntity.ok(allRideByPassengerId);
 
     }
 }

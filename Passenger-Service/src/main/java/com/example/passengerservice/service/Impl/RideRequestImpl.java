@@ -8,7 +8,10 @@ import com.example.passengerservice.service.JwtService;
 import com.example.passengerservice.service.RideRequestService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,5 +32,11 @@ public class RideRequestImpl implements RideRequestService {
         System.out.println(2);
         return modelMapper.map(rideRequestRepo.findByPassengerIdAndId(passengerId,rideId),
                 RideRequestDto.class);
+    }
+
+    @Override
+    public List<RideRequestDto> getAllRideByPassengerId(Integer passengerId) {
+        List<RideRequest> allByPassengerId = rideRequestRepo.findAllByPassengerId(passengerId);
+        return modelMapper.map(allByPassengerId,new TypeToken<List<RideRequestDto>>(){}.getType());
     }
 }
