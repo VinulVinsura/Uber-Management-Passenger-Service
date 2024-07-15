@@ -23,4 +23,11 @@ public class RideRequestImpl implements RideRequestService {
                 RideRequestDto.class);
 
     }
+
+    @Override
+    public RideRequestDto getSpecificRide(Integer passengerId, Integer rideId) {
+        System.out.println(2);
+        return modelMapper.map(rideRequestRepo.findByPassengerIdAndId(passengerId,rideId),
+                RideRequestDto.class);
+    }
 }
