@@ -12,6 +12,7 @@ public class Config {
         return new ModelMapper();
     }
 
+    //creat new RestTemplate Object
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
