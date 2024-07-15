@@ -37,7 +37,7 @@ public class RideRequestController {
         }
     }
 
-    // List all rides for the passenger.
+    // List all rides for the passenger.(GET API)
     @GetMapping("/allRides/{passengerId}")
     public ResponseEntity<List<RideRequestDto>> getAlLRidesByPassengerId(@PathVariable Integer passengerId){
 
