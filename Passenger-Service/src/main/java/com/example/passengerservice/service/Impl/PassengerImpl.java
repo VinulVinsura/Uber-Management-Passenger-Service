@@ -9,11 +9,16 @@ import com.example.passengerservice.service.JwtService;
 import com.example.passengerservice.service.PassengerService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -24,6 +29,7 @@ public class PassengerImpl implements PassengerService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final ModelMapper modelMapper;
+    private final RestTemplate restTemplate;
     @Override
     public AuthenticationResponse registerPassenger(PassengerDto passengerDto) {
         Passenger passenger=new Passenger();
@@ -58,5 +64,12 @@ public class PassengerImpl implements PassengerService {
     public PassengerDto getPassenger(Integer id) {
         Optional<Passenger> passenger = passengerRepo.findById(id);
         return modelMapper.map(passenger, PassengerDto.class);
+    }
+
+    @Override
+    public ResponseEntity<List> getNotification() {
+        ResponseEntity<List> responseEntity = restTemplate.exchange("http://localhost:9001/all-notifications",
+                HttpMethod.GET, null, List.class);
+        return responseEntity;
     }
 }

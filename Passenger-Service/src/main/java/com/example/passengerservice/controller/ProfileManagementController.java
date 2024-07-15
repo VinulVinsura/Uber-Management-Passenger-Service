@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Objects;
+
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
@@ -34,6 +37,13 @@ public class ProfileManagementController {
     public ResponseEntity<PassengerDto> getPassengerById(@PathVariable Integer id){
         PassengerDto passengerDto = passengerService.getPassenger(id);
         return ResponseEntity.ok(passengerDto);
+    }
+
+    @GetMapping("/notification")
+    public ResponseEntity<List> getNotification(){
+        ResponseEntity<List> notification = passengerService.getNotification();
+        return ResponseEntity.ok(notification.getBody());
+
     }
 
 }
