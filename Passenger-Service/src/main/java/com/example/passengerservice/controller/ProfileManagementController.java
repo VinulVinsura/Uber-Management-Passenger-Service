@@ -39,6 +39,7 @@ public class ProfileManagementController {
         return ResponseEntity.ok(passengerDto);
     }
 
+    //Get All Notification by Uber-Service DataBase
     @GetMapping("/notification")
     public ResponseEntity<List> getNotification(){
         ResponseEntity<List> notification = passengerService.getNotification();
