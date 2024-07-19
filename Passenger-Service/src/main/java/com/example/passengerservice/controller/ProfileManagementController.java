@@ -45,11 +45,19 @@ public class ProfileManagementController {
 
     }
 
+    //Create a new support ticket
     @PostMapping("/post-support-ticket")
     public ResponseEntity<SupportTicket> postSupportTicket(@RequestBody SupportTicket supportTicket){
         SupportTicket ticket = passengerService.postSupportTicket(supportTicket);
         return ResponseEntity.ok(ticket);
+    }
+
+    // List all support tickets for the passenger
+    @GetMapping("/get-support-tickets/{userId}")
+    public ResponseEntity<List> getSupportTicketById(@PathVariable String userId){
+        return  passengerService.getSupportTicketById(userId);
 
     }
+
 
 }

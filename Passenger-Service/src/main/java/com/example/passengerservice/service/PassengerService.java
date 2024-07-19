@@ -16,4 +16,5 @@ public interface PassengerService {
     PassengerDto getPassenger(Integer id);
     ResponseEntity<List> getNotification();
     SupportTicket postSupportTicket(SupportTicket supportTicket);
+    ResponseEntity<List> getSupportTicketById(String userId);
 }
