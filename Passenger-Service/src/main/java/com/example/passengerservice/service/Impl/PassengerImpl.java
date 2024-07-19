@@ -73,9 +73,10 @@ public class PassengerImpl implements PassengerService {
     //Get All Notification by Uber-Service DataBase (Use Rest Template)
     @Override
     public ResponseEntity<List> getNotification() {
-        ResponseEntity<List> responseEntity = restTemplate.exchange("http://localhost:9001/all-notifications",
-                HttpMethod.GET, null, List.class);
-        return responseEntity;
+        String url="http://localhost:9001/all-notifications";
+        ResponseEntity<List> resEntityList = restTemplate.getForEntity(url, List.class);
+
+        return resEntityList;
     }
 
     @Override
