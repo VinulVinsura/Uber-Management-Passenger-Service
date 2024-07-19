@@ -3,6 +3,7 @@ package com.example.passengerservice.service;
 import com.example.passengerservice.dto.AuthenticationResponse;
 import com.example.passengerservice.dto.LoginDto;
 import com.example.passengerservice.dto.PassengerDto;
+import com.example.passengerservice.dto.SupportTicket;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface PassengerService {
     AuthenticationResponse loginPassenger(LoginDto loginDto);
     PassengerDto getPassenger(Integer id);
     ResponseEntity<List> getNotification();
+    SupportTicket postSupportTicket(SupportTicket supportTicket);
 }

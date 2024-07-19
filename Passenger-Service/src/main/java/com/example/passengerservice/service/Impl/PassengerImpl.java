@@ -1,14 +1,17 @@
 package com.example.passengerservice.service.Impl;
 
-import com.example.passengerservice.dto.AuthenticationResponse;
-import com.example.passengerservice.dto.LoginDto;
-import com.example.passengerservice.dto.PassengerDto;
+import com.example.passengerservice.dto.*;
 import com.example.passengerservice.entity.Passenger;
 import com.example.passengerservice.repository.PassengerRepo;
 import com.example.passengerservice.service.JwtService;
 import com.example.passengerservice.service.PassengerService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.Nullable;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -73,6 +76,14 @@ public class PassengerImpl implements PassengerService {
         ResponseEntity<List> responseEntity = restTemplate.exchange("http://localhost:9001/all-notifications",
                 HttpMethod.GET, null, List.class);
         return responseEntity;
+    }
+
+    @Override
+    public SupportTicket postSupportTicket(SupportTicket supportTicket) {
+        String url="http://localhost:9001/post/support-ticket";
+        HttpEntity<SupportTicket> supportTicketReq=new HttpEntity<>(supportTicket);
+        ResponseEntity<SupportTicket> supportTicketRes = restTemplate.postForEntity(url, supportTicketReq, SupportTicket.class);
+        return supportTicketRes.getBody();
     }
 }
 
