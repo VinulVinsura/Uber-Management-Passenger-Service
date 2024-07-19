@@ -7,6 +7,7 @@ import com.example.passengerservice.dto.SupportTicket;
 import com.example.passengerservice.service.PassengerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,6 +57,15 @@ public class ProfileManagementController {
     @GetMapping("/get-support-tickets/{userId}")
     public ResponseEntity<List> getSupportTicketById(@PathVariable String userId){
         return  passengerService.getSupportTicketById(userId);
+
+    }
+
+    // Get details of a specific support ticket.
+    @GetMapping("/get-support-tickets/{userId}/{ticketId}")
+    public ResponseEntity<SupportTicket> getSupportTicketByTicketId(@PathVariable String userId,
+                                                                    @PathVariable Integer ticketId){
+        SupportTicket ticket = passengerService.getSupportTicketByTicketId(userId, ticketId);
+        return ResponseEntity.ok(ticket);
 
     }
 

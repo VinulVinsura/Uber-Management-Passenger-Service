@@ -94,5 +94,13 @@ public class PassengerImpl implements PassengerService {
 
         return resEntityList;
     }
+
+    @Override
+    public SupportTicket getSupportTicketByTicketId(String userId, Integer ticketId) {
+        String url="http://localhost:9001/get-support-ticket/"+userId+"/"+ticketId;
+        ResponseEntity<SupportTicket> response = restTemplate.getForEntity(url, SupportTicket.class);
+
+        return response.getBody();
+    }
 }
 

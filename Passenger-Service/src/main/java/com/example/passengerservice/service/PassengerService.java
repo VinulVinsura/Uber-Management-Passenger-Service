@@ -17,4 +17,5 @@ public interface PassengerService {
     ResponseEntity<List> getNotification();
     SupportTicket postSupportTicket(SupportTicket supportTicket);
     ResponseEntity<List> getSupportTicketById(String userId);
+    SupportTicket getSupportTicketByTicketId(String userId, Integer ticketId);
 }
