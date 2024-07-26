@@ -54,9 +54,14 @@ public class ProfileManagementController {
     }
 
     // List all support tickets for the passenger
-    @GetMapping("/get-support-tickets/{userId}")
+    @GetMapping("/getAll-support-tickets/{userId}")
     public ResponseEntity<List> getSupportTicketById(@PathVariable String userId){
-        return  passengerService.getSupportTicketById(userId);
+        try {
+            return  passengerService.getSupportTicketByUserId(userId);
+        }catch (RuntimeException ex){
+            return ResponseEntity.notFound().build();
+        }
+
 
     }
 

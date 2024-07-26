@@ -88,8 +88,8 @@ public class PassengerImpl implements PassengerService {
     }
 
     @Override
-    public ResponseEntity<List> getSupportTicketById(String userId) {
-        String url="http://localhost:9001/get-support-ticket/"+userId;
+    public ResponseEntity<List> getSupportTicketByUserId(String userId) {
+        String url="http://localhost:9001/getAll-support-ticket/"+userId+"/Passenger";
         ResponseEntity<List> resEntityList = restTemplate.getForEntity(url, List.class);
 
         return resEntityList;
